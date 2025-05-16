@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\leone\\OneDrive\\Desktop\\322_final\\backend\\logs\\.7130b247d55f4de166780c4470f345b18c870ffd-audit.json",
+    "files": [
+        {
+            "date": 1747380491854,
+            "name": "C:\\Users\\leone\\OneDrive\\Desktop\\322_final\\backend\\logs\\application-2025-05-16.log",
+            "hash": "1808c2cab04d0a3a49f9bb8e3920b6d8246f8a84d36e972673fb30e1d6b2073c"
+        }
+    ],
+    "hashType": "sha256"
+}
