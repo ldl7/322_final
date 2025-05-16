@@ -50,40 +50,43 @@ module.exports = (sequelize) => {
       },
     },
     type: {
-      type: DataTypes.ENUM('text', 'image', 'file', 'audio', 'video'), // Added more types
+      type: DataTypes.ENUM('text', 'image', 'file', 'audio', 'video'), 
       defaultValue: 'text',
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM('sending', 'sent', 'delivered', 'read', 'failed'), // Added 'failed' status
+      type: DataTypes.ENUM('sending', 'sent', 'delivered', 'read', 'failed'), 
       defaultValue: 'sending',
       allowNull: false,
     },
     senderId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'sender_id',
       references: {
-        model: 'users',
+        model: 'users', 
         key: 'id'
-      },
+      }
     },
     conversationId: {
       type: DataTypes.UUID,
       allowNull: false,
+      field: 'conversation_id',
       references: {
-        model: 'conversations',
+        model: 'conversations', 
         key: 'id'
-      },
+      }
     },
-    parentMessageId: { // For threaded replies
+    parentMessageId: {
       type: DataTypes.UUID,
       allowNull: true,
+      field: 'parent_message_id',
       references: {
-        model: 'messages',
+        model: 'messages', 
         key: 'id'
-      },
+      }
     },
-    metadata: { // For storing additional info like file URLs, image dimensions etc.
+    metadata: {
       type: DataTypes.JSONB,
       allowNull: true,
     }
@@ -92,6 +95,21 @@ module.exports = (sequelize) => {
     modelName: 'Message',
     tableName: 'messages',
     timestamps: true,
+    underscored: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    freezeTableName: true,
+    indexes: [
+      {
+        fields: ['conversation_id'],
+      },
+      {
+        fields: ['sender_id'],
+      },
+      {
+        fields: ['created_at'],
+      }
+    ]
   });
 
   return Message;

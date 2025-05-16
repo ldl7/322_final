@@ -325,3 +325,145 @@ Require stack:
     at Server.listen (node:net:2099:7)
     at C:\Users\leone\OneDrive\Desktop\322_final\backend\server.js:136:12
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-05-16 11:29:17.249 [31merror[39m: TypeError: Router.use() requires a middleware function
+    at Function.use (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:462:11)
+    at module.exports (C:\Users\leone\OneDrive\Desktop\322_final\backend\routes\conversations.js:22:10)
+    at Object.<anonymous> (C:\Users\leone\OneDrive\Desktop\322_final\backend\server.js:19:28)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
+2025-05-16 11:35:05.077 [31merror[39m: TypeError: Cannot read properties of undefined (reading 'apply')
+    at C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:646:15
+    at next (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:216:14)
+    at Function.handle (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:47:12)
+    at Object.<anonymous> (C:\Users\leone\OneDrive\Desktop\322_final\backend\server.js:19:28)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+2025-05-16 11:49:35.230 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 12:48:15.377 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 12:52:30.293 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 12:54:19.732 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 12:54:49.624 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 13:07:46.869 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 13:12:13.911 [31merror[39m: C:\Users\leone\OneDrive\Desktop\322_final\backend\controllers\chatController.js:37
+const { Conversation, User, UserConversation } = require('../models');
+        ^
+
+SyntaxError: Identifier 'Conversation' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1486:18)
+    at Module._compile (node:internal/modules/cjs/loader:1528:20)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Module.require (node:internal/modules/cjs/loader:1311:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (C:\Users\leone\OneDrive\Desktop\322_final\backend\routes\conversations.js:15:24)
+2025-05-16 13:13:46.284 [31merror[39m: C:\Users\leone\OneDrive\Desktop\322_final\backend\controllers\chatController.js:37
+const { Conversation, User, UserConversation } = require('../models');
+        ^
+
+SyntaxError: Identifier 'Conversation' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1486:18)
+    at Module._compile (node:internal/modules/cjs/loader:1528:20)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Module.require (node:internal/modules/cjs/loader:1311:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (C:\Users\leone\OneDrive\Desktop\322_final\backend\routes\conversations.js:15:24)
+2025-05-16 13:24:54.193 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 13:46:35.517 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 14:30:39.505 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 16:13:13.984 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 16:21:22.823 [31merror[39m: C:\Users\leone\OneDrive\Desktop\322_final\backend\controllers\chatController.js:302
+  } catch (error) {
+    ^^^^^
+
+SyntaxError: Unexpected token 'catch'
+    at wrapSafe (node:internal/modules/cjs/loader:1486:18)
+    at Module._compile (node:internal/modules/cjs/loader:1528:20)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Module.require (node:internal/modules/cjs/loader:1311:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (C:\Users\leone\OneDrive\Desktop\322_final\backend\routes\conversations.js:15:24)
+2025-05-16 16:22:34.259 [31merror[39m: C:\Users\leone\OneDrive\Desktop\322_final\backend\controllers\chatController.js:302
+  } catch (error) {
+    ^^^^^
+
+SyntaxError: Unexpected token 'catch'
+    at wrapSafe (node:internal/modules/cjs/loader:1486:18)
+    at Module._compile (node:internal/modules/cjs/loader:1528:20)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Module.require (node:internal/modules/cjs/loader:1311:12)
+    at require (node:internal/modules/helpers:136:16)
+    at Object.<anonymous> (C:\Users\leone\OneDrive\Desktop\322_final\backend\routes\conversations.js:15:24)
+2025-05-16 16:28:20.085 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-16 16:43:23.645 [31merror[39m: Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at node:net:2203:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)

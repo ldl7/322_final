@@ -86,7 +86,7 @@ const loginUser = async (email, password) => {
   }
 
   // Find user by email, including sensitive info for password comparison
-  const user = await User.scope('withSensitiveInfo').findOne({ where: { email } });
+  const user = await User.scope('withSensitiveData').findOne({ where: { email } });
 
   if (!user) {
     logger.warn(`Login attempt failed for non-existent email: ${email}`);

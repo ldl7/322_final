@@ -27,6 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@stomp/stompjs": "^7.1.1",
+    "axios": "^1.9.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -45,6 +46,7 @@
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "sockjs-client": "^1.6.1",
+    "uuid": "^9.0.1",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
   },

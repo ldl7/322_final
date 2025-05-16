@@ -1,78 +1,101 @@
 /**
- * Authentication Middleware
+ * Authentication Middleware (Development Version)
  * 
- * Middleware functions for authenticating and authorizing requests.
- * Verifies JWT tokens and checks user permissions.
- * 
- * @module middleware/auth
- * @requires jsonwebtoken
- * @requires passport
- * @requires ../models/User
- * @requires ../utils/logger
- * @requires ../utils/errors
- * 
- * @example
- * // Protect a route with JWT authentication
- * router.get('/protected', authenticateJWT, controller.protectedRoute);
- * 
- * // Require specific roles
- * router.get('/admin', authenticateJWT, authorizeRoles('admin'), controller.adminRoute);
+ * For development purposes only - automatically authenticates as a test user
+ * In production, use proper JWT authentication
  */
 
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
 const { User } = require('../models');
 const logger = require('../utils/logger');
-const { UnauthorizedError, ForbiddenError } = require('../utils/errors');
-const httpStatusCodes = require('http-status-codes');
+const { UnauthorizedError } = require('../utils/errors');
 
 /**
- * Middleware to authenticate requests using JWT.
- * Verifies the token from the Authorization header, and if valid,
- * attaches the user object to req.user.
+ * Middleware that automatically authenticates as the test user
+ * Skips JWT verification for development purposes
  */
 const authenticateJWT = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.substring(7, authHeader.length); // Extract token from 'Bearer <token>'
-
-    try {
-      const decoded = jwt.verify(token, config.jwt.secret);
-      
-      // Find user by ID from token payload
-      // Ensure we select only necessary fields, or rely on default scope / toJSON
-      const user = await User.findByPk(decoded.sub); // 'sub' is typically used for user ID in JWT
-
-      if (!user) {
-        logger.warn(`Authentication failed: User ${decoded.sub} not found.`);
-        return next(new UnauthorizedError('Authentication failed: User not found.'));
-      }
-
-      // Check if email is verified if necessary for certain routes (can be a separate middleware)
-      // For now, just attach user to request object
-      req.user = user; // The user model's toJSON should strip sensitive fields
-      logger.info(`User authenticated: ${user.email} (ID: ${user.id})`);
-      next();
-    } catch (error) {
-      logger.error('JWT Authentication error:', error.message);
-      if (error.name === 'TokenExpiredError') {
-        return next(new UnauthorizedError('Authentication failed: Token expired.'));
-      }
-      if (error.name === 'JsonWebTokenError') {
-        return next(new UnauthorizedError('Authentication failed: Invalid token.'));
-      }
-      // For other errors during verification or user fetching
-      return next(new UnauthorizedError('Authentication failed.'));
+  logger.info('=== AUTHENTICATE JWT (DEV MODE) ===');
+  
+  try {
+    // Log all users for debugging
+    const allUsers = await User.findAll({
+      attributes: ['id', 'email', 'username', 'role'],
+      raw: true
+    });
+    logger.info(`Found ${allUsers.length} users in database:`, JSON.stringify(allUsers, null, 2));
+    
+    // Always use the test user in development
+    const testUser = await User.findOne({ 
+      where: { email: 'test@example.com' }
+    });
+    
+    if (!testUser) {
+      const errorMsg = 'Test user not found in database. Please run database migrations and seed data.';
+      logger.error(errorMsg);
+      return res.status(401).json({ 
+        status: 'error', 
+        message: errorMsg,
+        availableUsers: allUsers
+      });
     }
-  } else {
-    logger.warn('Authentication attempt without Bearer token.');
-    // No token provided or not Bearer scheme
-    return next(new UnauthorizedError('Authentication failed: No token provided or invalid format.'));
+    
+    // Store the test user ID in global app state for easy access
+    global.testUserId = testUser.id;
+    logger.info(`Set global testUserId to: ${global.testUserId}`);
+    
+    // Ensure we have all required user properties
+    const userData = {
+      id: testUser.id,
+      email: testUser.email,
+      username: testUser.username,
+      role: testUser.role || 'user',
+      isAuthenticated: true
+    };
+    
+    // Attach the test user to the request
+    req.user = userData;
+    logger.info(`Authenticated as test user: ${JSON.stringify(userData, null, 2)}`);
+    
+    return next();
+  } catch (error) {
+    logger.error('Authentication error:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+      code: error.code
+    });
+    
+    return res.status(500).json({ 
+      status: 'error',
+      message: 'Authentication failed',
+      ...(process.env.NODE_ENV === 'development' && { 
+        error: error.message,
+        stack: error.stack 
+      })
+    });
   }
+};
+
+/**
+ * Middleware to check if user has required roles
+ * @param {...string} roles - Roles that are allowed to access the route
+ * @returns {Function} Middleware function
+ */
+const authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return next(new UnauthorizedError('Authentication required'));
+    }
+    
+    if (roles.length && !roles.includes(req.user.role)) {
+      return next(new UnauthorizedError('Insufficient permissions'));
+    }
+    
+    next();
+  };
 };
 
 module.exports = {
   authenticateJWT,
-  // authorizeRoles will be implemented later if needed
+  authorizeRoles
 };

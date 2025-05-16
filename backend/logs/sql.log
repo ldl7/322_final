@@ -89,3 +89,268 @@
 2025-05-16T09:49:21.236Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
 2025-05-16T09:49:21.238Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
 2025-05-16T10:00:24.654Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T16:45:55.208Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T16:45:55.212Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T16:45:55.224Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T16:45:55.226Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T16:45:55.233Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T16:46:21.267Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T16:46:21.350Z - Executing (default): SELECT id FROM users WHERE email = 'test@example.com' OR username = 'testuser'
+2025-05-16T16:47:41.055Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T16:47:41.140Z - Executing (default): SELECT id FROM users WHERE email = 'test@example.com' OR username = 'testuser'
+2025-05-16T17:30:41.506Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T17:30:41.510Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T17:30:41.517Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T17:30:41.519Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T17:30:41.526Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T17:30:41.530Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T17:30:41.533Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T17:30:41.535Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T17:30:41.539Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T17:30:41.542Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T17:30:41.545Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T17:30:41.549Z - Executing (default): ALTER TABLE `conversations` ADD `type` ENUM('direct', 'group') NOT NULL DEFAULT 'direct';
+2025-05-16T17:30:41.580Z - Executing (default): ALTER TABLE `conversations` ADD `name` VARCHAR(255);
+2025-05-16T17:30:41.603Z - Executing (default): ALTER TABLE `conversations` ADD `createdBy` CHAR(36) BINARY NOT NULL, ADD CONSTRAINT `conversations_createdBy_foreign_idx` FOREIGN KEY (`createdBy`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+2025-05-16T17:30:41.648Z - Executing (default): ALTER TABLE `conversations` ADD INDEX `conversations_created_by` (`createdBy`)
+2025-05-16T17:30:41.663Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T17:30:41.665Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T17:30:41.670Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:00:10.353Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:00:10.357Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:00:10.365Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:00:10.367Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:00:10.374Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:00:10.378Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:00:10.380Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:00:10.383Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:00:10.387Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:00:10.390Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:00:10.392Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:00:10.398Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`id` CHAR(36) BINARY NOT NULL , `userId` CHAR(36) BINARY NOT NULL, `conversationId` CHAR(36) BINARY NOT NULL, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversationId`) REFERENCES `Conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:00:10.403Z - Executing (default): ALTER TABLE `UserConversations` ADD UNIQUE INDEX `user_conversation_unique` (`userId`, `conversationId`)
+2025-05-16T18:03:54.071Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:03:54.075Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:03:54.083Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:03:54.085Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:03:54.092Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:03:54.097Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:03:54.099Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:03:54.102Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:03:54.106Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:03:54.109Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:03:54.112Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:03:54.118Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`id` CHAR(36) BINARY NOT NULL , `user_id` CHAR(36) BINARY NOT NULL, `conversation_id` CHAR(36) BINARY NOT NULL, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `Conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:03:54.121Z - Executing (default): ALTER TABLE `UserConversations` ADD UNIQUE INDEX `user_conversation_unique` (`userId`, `conversationId`)
+2025-05-16T18:05:48.526Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:05:48.530Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:05:48.535Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.537Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.544Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.549Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.551Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.554Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.562Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.565Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.568Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.571Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'role') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'role' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.581Z - Executing (default): ALTER TABLE `users` DROP `role`;
+2025-05-16T18:05:48.597Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'is_email_verified') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'is_email_verified' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.602Z - Executing (default): ALTER TABLE `users` DROP `is_email_verified`;
+2025-05-16T18:05:48.618Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'last_login') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'last_login' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.624Z - Executing (default): ALTER TABLE `users` DROP `last_login`;
+2025-05-16T18:05:48.642Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'refresh_token') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'refresh_token' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.647Z - Executing (default): ALTER TABLE `users` DROP `refresh_token`;
+2025-05-16T18:05:48.662Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'password_reset_token') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'password_reset_token' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.668Z - Executing (default): ALTER TABLE `users` DROP `password_reset_token`;
+2025-05-16T18:05:48.682Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'password_reset_expires') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'password_reset_expires' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.688Z - Executing (default): ALTER TABLE `users` DROP `password_reset_expires`;
+2025-05-16T18:05:48.728Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'email_verification_token') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'email_verification_token' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.733Z - Executing (default): ALTER TABLE `users` DROP `email_verification_token`;
+2025-05-16T18:05:48.749Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'email_verification_token_expires') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'email_verification_token_expires' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.755Z - Executing (default): ALTER TABLE `users` DROP `email_verification_token_expires`;
+2025-05-16T18:05:48.769Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.772Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.776Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516090000-add-missing-user-columns.js'
+2025-05-16T18:05:48.780Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.782Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.784Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.787Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'passwordResetToken') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'passwordResetToken' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.793Z - Executing (default): ALTER TABLE `users` DROP `passwordResetToken`;
+2025-05-16T18:05:48.809Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'passwordResetExpires') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'passwordResetExpires' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.814Z - Executing (default): ALTER TABLE `users` DROP `passwordResetExpires`;
+2025-05-16T18:05:48.828Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'emailVerificationToken') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'emailVerificationToken' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.833Z - Executing (default): ALTER TABLE `users` DROP `emailVerificationToken`;
+2025-05-16T18:05:48.849Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'users' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'emailVerificationTokenExpires') OR (TABLE_NAME = 'users' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'emailVerificationTokenExpires' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.854Z - Executing (default): ALTER TABLE `users` DROP `emailVerificationTokenExpires`;
+2025-05-16T18:05:48.868Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.871Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.875Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516052212-add-auth-fields-to-user.js'
+2025-05-16T18:05:48.879Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.881Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.884Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.886Z - Executing (default): DROP TABLE IF EXISTS `UserConversations`;
+2025-05-16T18:05:48.899Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.901Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.903Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516003709-create-user-conversations-join-table.js'
+2025-05-16T18:05:48.907Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.909Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.911Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.914Z - Executing (default): DROP TABLE IF EXISTS `messages`;
+2025-05-16T18:05:48.925Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.927Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.929Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516003459-create-messages.js'
+2025-05-16T18:05:48.932Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.934Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.936Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.938Z - Executing (default): DROP TABLE IF EXISTS `conversations`;
+2025-05-16T18:05:48.948Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.950Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.952Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516003411-create-conversations.js'
+2025-05-16T18:05:48.955Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.957Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.959Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.962Z - Executing (default): DROP TABLE IF EXISTS `users`;
+2025-05-16T18:05:48.970Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.972Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.974Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516003134-create-users.js'
+2025-05-16T18:05:48.977Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:05:48.979Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:05:48.982Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:05:48.984Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'conversations' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'type') OR (TABLE_NAME = 'conversations' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'type' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-16T18:05:48.989Z - Executing (default): ALTER TABLE `conversations` DROP `type`;
+2025-05-16T18:06:01.936Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:06:01.940Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:06:01.947Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:06:01.950Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:06:01.958Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:06:01.962Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:06:01.965Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:06:01.968Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:06:01.977Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:06:01.979Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:06:01.981Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:06:01.987Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`id` CHAR(36) BINARY NOT NULL , `user_id` CHAR(36) BINARY NOT NULL, `conversation_id` CHAR(36) BINARY NOT NULL, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `Conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:07:09.828Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:07:09.835Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:09:12.381Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:09:12.384Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:09:12.392Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:09:12.396Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:09:12.403Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:09:12.408Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:09:12.411Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:09:12.414Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:09:12.417Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:09:12.419Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:09:12.422Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:09:12.427Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:09:12.429Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:09:12.432Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:09:12.437Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`id` CHAR(36) BINARY NOT NULL , `user_id` CHAR(36) BINARY NOT NULL, `conversation_id` CHAR(36) BINARY NOT NULL, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `Conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:21:25.945Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:21:25.948Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:21:25.955Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:21:25.958Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:21:25.965Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:21:25.969Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:21:25.972Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:21:25.975Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:21:25.980Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:21:25.983Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:21:25.985Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:21:25.990Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`id` CHAR(36) BINARY NOT NULL , `user_id` CHAR(36) BINARY NOT NULL, `conversation_id` CHAR(36) BINARY NOT NULL, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `Conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:29:42.567Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:29:42.570Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:29:42.577Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.580Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.586Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.591Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.594Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.597Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.602Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.604Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.608Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.612Z - Executing (default): CREATE TABLE IF NOT EXISTS `users` (`id` CHAR(36) BINARY NOT NULL , `username` VARCHAR(255) NOT NULL UNIQUE, `email` VARCHAR(255) NOT NULL UNIQUE, `password` VARCHAR(255) NOT NULL, `first_name` VARCHAR(255), `last_name` VARCHAR(255), `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+2025-05-16T18:29:42.642Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.644Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.649Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:42.654Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.657Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.659Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.662Z - Executing (default): CREATE TABLE IF NOT EXISTS `conversations` (`id` CHAR(36) BINARY NOT NULL , `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+2025-05-16T18:29:42.674Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.677Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.680Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:42.683Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.685Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.688Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.692Z - Executing (default): CREATE TABLE IF NOT EXISTS `messages` (`id` CHAR(36) BINARY NOT NULL , `content` TEXT NOT NULL, `sender_id` CHAR(36) BINARY NOT NULL, `conversation_id` CHAR(36) BINARY NOT NULL, `is_read` TINYINT(1) NOT NULL DEFAULT false, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:29:42.721Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.723Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.726Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:42.729Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.731Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.733Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.735Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`user_id` CHAR(36) BINARY NOT NULL , `conversation_id` CHAR(36) BINARY NOT NULL , `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`user_id`, `conversation_id`), FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:29:42.762Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.764Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.766Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:42.769Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.771Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.774Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.777Z - Executing (default): CREATE TABLE IF NOT EXISTS `UserConversations` (`id` CHAR(36) BINARY NOT NULL , `user_id` CHAR(36) BINARY NOT NULL, `conversation_id` CHAR(36) BINARY NOT NULL, `created_at` DATETIME NOT NULL, `updated_at` DATETIME NOT NULL, PRIMARY KEY (`id`), FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`conversation_id`) REFERENCES `Conversations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+2025-05-16T18:29:42.780Z - Executing (default): ALTER TABLE `UserConversations` ADD UNIQUE INDEX `user_conversation_unique` (`user_id`, `conversation_id`)
+2025-05-16T18:29:42.789Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.791Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.794Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:42.796Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.798Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.800Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.803Z - Executing (default): ALTER TABLE `users` ADD `passwordResetToken` VARCHAR(255);
+2025-05-16T18:29:42.844Z - Executing (default): ALTER TABLE `users` ADD `passwordResetExpires` DATETIME;
+2025-05-16T18:29:42.881Z - Executing (default): ALTER TABLE `users` ADD `emailVerificationToken` VARCHAR(255);
+2025-05-16T18:29:42.918Z - Executing (default): ALTER TABLE `users` ADD `emailVerificationTokenExpires` DATETIME;
+2025-05-16T18:29:42.959Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.961Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.963Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:42.966Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:42.968Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:42.971Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:42.974Z - Executing (default): ALTER TABLE `users` ADD `role` ENUM('user', 'admin') NOT NULL DEFAULT 'user';
+2025-05-16T18:29:43.008Z - Executing (default): ALTER TABLE `users` ADD `is_email_verified` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-16T18:29:43.048Z - Executing (default): ALTER TABLE `users` ADD `last_login` DATETIME;
+2025-05-16T18:29:43.084Z - Executing (default): ALTER TABLE `users` ADD `refresh_token` VARCHAR(255);
+2025-05-16T18:29:43.121Z - Executing (default): ALTER TABLE `users` ADD `password_reset_token` VARCHAR(255);
+2025-05-16T18:29:43.163Z - Executing (default): ALTER TABLE `users` ADD `password_reset_expires` DATETIME;
+2025-05-16T18:29:43.205Z - Executing (default): ALTER TABLE `users` ADD `email_verification_token` VARCHAR(255);
+2025-05-16T18:29:43.247Z - Executing (default): ALTER TABLE `users` ADD `email_verification_token_expires` DATETIME;
+2025-05-16T18:29:43.289Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:43.291Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:43.295Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:29:43.297Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:43.299Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:43.301Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:29:43.303Z - Executing (default): ALTER TABLE `conversations` ADD `type` ENUM('direct', 'group') NOT NULL DEFAULT 'direct';
+2025-05-16T18:29:43.329Z - Executing (default): ALTER TABLE `conversations` ADD `name` VARCHAR(255);
+2025-05-16T18:29:43.351Z - Executing (default): ALTER TABLE `conversations` ADD `createdBy` CHAR(36) BINARY NOT NULL, ADD CONSTRAINT `conversations_createdBy_foreign_idx` FOREIGN KEY (`createdBy`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+2025-05-16T18:29:43.389Z - Executing (default): ALTER TABLE `conversations` ADD INDEX `conversations_created_by` (`createdBy`)
+2025-05-16T18:29:43.401Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:29:43.404Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:29:43.406Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T18:42:42.399Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T18:42:42.402Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T18:42:42.407Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:42:42.410Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:42:42.416Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T18:42:42.424Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T18:42:42.426Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T18:42:42.429Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T19:16:41.189Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T19:16:41.193Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T19:16:41.198Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T19:16:41.201Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T19:16:41.207Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T19:16:41.214Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T19:16:41.217Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T19:16:41.220Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;

@@ -1,0 +1,22 @@
+2025-05-16 13:03:17.761 [31merror[39m: ReferenceError: sequelize is not defined
+    at getOrCreateConversation (C:\Users\leone\OneDrive\Desktop\322_final\backend\controllers\chatController.js:56:13)
+    at Layer.handle [as handle_request] (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:280:10)
+    at authenticateJWT (C:\Users\leone\OneDrive\Desktop\322_final\backend\middleware\auth.js:32:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-05-16 13:08:17.574 [31merror[39m: ReferenceError: sequelize is not defined
+    at getOrCreateConversation (C:\Users\leone\OneDrive\Desktop\322_final\backend\controllers\chatController.js:68:13)
+    at Layer.handle [as handle_request] (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\leone\OneDrive\Desktop\322_final\backend\node_modules\express\lib\router\index.js:280:10)
+    at authenticateJWT (C:\Users\leone\OneDrive\Desktop\322_final\backend\middleware\auth.js:56:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)

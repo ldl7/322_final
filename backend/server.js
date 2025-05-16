@@ -31,9 +31,13 @@ const io = new Server(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
       ? process.env.CLIENT_URL 
-      : 'http://localhost:3000', // Frontend URL
-    methods: ['GET', 'POST'],
-    credentials: true
+      : ['http://localhost:3000', 'http://localhost:19000', 'http://localhost:19006', 
+         'exp://localhost:19000', 'exp://127.0.0.1:19000', 
+         'exp://69.120.124.150:19000', 'http://69.120.124.150:19000',
+         'http://69.120.124.150:5000', 'http://69.120.124.150:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
   },
   pingTimeout: 60000,
   pingInterval: 25000,
@@ -48,7 +52,10 @@ app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? process.env.CLIENT_URL 
-    : 'http://localhost:3000',
+    : ['http://localhost:3000', 'http://localhost:19000', 'http://localhost:19006', 
+       'exp://localhost:19000', 'exp://127.0.0.1:19000', 
+       'exp://69.120.124.150:19000', 'http://69.120.124.150:19000',
+       'http://69.120.124.150:5000', 'http://69.120.124.150:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -129,12 +136,34 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Start server only after DB connection is successful
+// Import test user creator
+const createTestUser = require('./seeders/createTestUser');
+
+// Database connection and server start
 sequelize.authenticate()
-  .then(() => {
+  .then(async () => {
     logger.info('Database connection established successfully.');
-    server.listen(PORT, () => {
+    
+    // Create test user
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        logger.info('Setting up test user...');
+        const result = await createTestUser();
+        if (result.success) {
+          logger.info(result.message);
+        } else {
+          logger.error('Failed to create test user:', result.message);
+          if (result.error) logger.error('Error details:', result.error);
+        }
+      } catch (error) {
+        logger.error('Unexpected error in test user setup:', error);
+      }
+    }
+    
+    // Start the server
+    server.listen(PORT, '0.0.0.0', () => {
       logger.info(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+      logger.info(`Server bound to all network interfaces (0.0.0.0)`);
     });
   })
   .catch(error => {
