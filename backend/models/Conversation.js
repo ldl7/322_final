@@ -36,8 +36,8 @@ module.exports = (sequelize) => {
       // Participants in this conversation
       Conversation.belongsToMany(models.User, { 
         through: models.UserConversation, 
-        foreignKey: 'conversation_id', 
-        otherKey: 'user_id', 
+        foreignKey: 'conversationId', 
+        otherKey: 'userId', 
         as: 'participants'
       });
       
@@ -49,8 +49,8 @@ module.exports = (sequelize) => {
       
       // UserConversation entries for this conversation
       Conversation.hasMany(models.UserConversation, {
-        foreignKey: 'conversation_id',
-        as: 'conversationUsers'
+        foreignKey: 'conversationId',
+        as: 'userConversations' // Changed to match the alias used in conversationService.js
       });
     }
   }

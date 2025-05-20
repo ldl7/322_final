@@ -354,3 +354,201 @@
 2025-05-16T19:16:41.214Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
 2025-05-16T19:16:41.217Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
 2025-05-16T19:16:41.220Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:41:35.269Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T23:41:35.273Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T23:41:35.282Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:41:35.285Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:41:35.294Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:41:35.300Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:41:35.304Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:41:35.308Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:41:35.312Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:41:35.315Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:41:35.318Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:41:35.322Z - Executing (default): ALTER TABLE `messages` ADD `parent_message_id` CHAR(36) BINARY, ADD CONSTRAINT `messages_parent_message_id_foreign_idx` FOREIGN KEY (`parent_message_id`) REFERENCES `messages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+2025-05-16T23:41:35.375Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:41:35.378Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:41:35.383Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-16T23:49:58.959Z - Executing (default): SELECT 1+1 AS result
+2025-05-16T23:49:58.963Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-16T23:49:58.972Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:49:58.976Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:49:58.983Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:49:58.988Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:49:58.991Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:49:58.995Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:49:59.001Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:49:59.004Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:49:59.008Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-16T23:49:59.012Z - Executing (default): ALTER TABLE `messages` ADD `metadata` JSON;
+2025-05-16T23:49:59.026Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-16T23:49:59.029Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-16T23:49:59.035Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-19T20:23:07.793Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:23:07.799Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:23:07.819Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:23:07.824Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:23:07.853Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:30:43.531Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:30:43.538Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:30:43.551Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:30:43.558Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:30:43.577Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:30:43.589Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:30:43.595Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:30:43.600Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:30:43.607Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:30:43.611Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:30:43.615Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:30:43.622Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:30:43.682Z - Executing (default): ALTER TABLE `conversations` ADD INDEX `conversations_is_ai_conversation` (`is_ai_conversation`)
+2025-05-19T20:32:23.458Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:32:23.462Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:32:23.472Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:32:23.476Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:32:23.486Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:32:23.493Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:32:23.496Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:32:23.500Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:32:23.505Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:32:23.509Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:32:23.512Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:32:23.518Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:33:18.943Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:33:18.948Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:33:18.956Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:33:18.960Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:33:18.970Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:33:18.979Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:33:18.982Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:33:18.987Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:34:12.897Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:34:12.902Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:34:12.909Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:34:12.913Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:34:12.922Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:34:12.928Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:34:12.931Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:34:12.936Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:34:12.942Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:34:12.944Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:34:12.948Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:34:12.953Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:34:12.956Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:34:12.959Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:34:12.965Z - Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'messages' AND REFERENCED_TABLE_SCHEMA = 'coach_ally' AND REFERENCED_COLUMN_NAME = 'metadata') OR (TABLE_NAME = 'messages' AND TABLE_SCHEMA = 'coach_ally' AND COLUMN_NAME = 'metadata' AND REFERENCED_TABLE_NAME IS NOT NULL)
+2025-05-19T20:34:12.979Z - Executing (default): ALTER TABLE `messages` DROP `metadata`;
+2025-05-19T20:34:13.008Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:34:13.011Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:34:13.017Z - Executing (default): DELETE FROM `SequelizeMeta` WHERE `name` = '20250516234933-add-metadata-to-messages.js'
+2025-05-19T20:35:05.023Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:35:05.027Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:35:05.036Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:05.040Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:05.050Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:05.059Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:05.063Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:05.068Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:35.305Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:35:35.310Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:35:35.325Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:35.328Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:35.337Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:35.342Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:35.345Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:35.350Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:35.355Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:35.358Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:35.362Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:35.367Z - Executing (default): ALTER TABLE `messages` ADD `metadata` JSON;
+2025-05-19T20:35:35.388Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:35.391Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:35.396Z - Executing (default): INSERT INTO `SequelizeMeta` (`name`) VALUES (?);
+2025-05-19T20:35:35.403Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:35.406Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:35.409Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:35.413Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:35:47.951Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:35:47.956Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:35:47.963Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:47.967Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:47.977Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:35:47.987Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:35:47.991Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:35:47.995Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:38:54.533Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:38:54.539Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:38:54.551Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:38:54.555Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:38:54.563Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:38:54.569Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:38:54.573Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:38:54.577Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:38:54.582Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:38:54.586Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:38:54.590Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:38:54.595Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:39:06.875Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:39:06.880Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:39:06.886Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:39:06.890Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:39:06.898Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:39:06.909Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:39:06.913Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:39:06.918Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:39:29.046Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:39:29.051Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:39:29.061Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:39:29.064Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:39:29.073Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:39:29.078Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:39:29.081Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:39:29.086Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:39:29.091Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:39:29.094Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:39:29.099Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:39:29.105Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:45:10.430Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:45:10.436Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:45:10.446Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:45:10.449Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:45:10.459Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:45:10.466Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:45:10.469Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:45:10.474Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:45:10.479Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:45:10.483Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:45:10.487Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:45:10.492Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:48:35.196Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:48:35.201Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:48:35.213Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:48:35.217Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:48:35.226Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:48:35.233Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:48:35.237Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:48:35.242Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:48:35.249Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:48:35.253Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:48:35.257Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:48:35.263Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:49:52.050Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:49:52.055Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:49:52.065Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:49:52.070Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:49:52.079Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:49:52.086Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:49:52.089Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:49:52.093Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:49:52.100Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:49:52.103Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:49:52.107Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:49:52.111Z - Executing (default): ALTER TABLE `conversations` ADD `isAIConversation` TINYINT(1) NOT NULL DEFAULT false;
+2025-05-19T20:54:15.883Z - Executing (default): SELECT 1+1 AS result
+2025-05-19T20:54:15.888Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = 'coach_ally';
+2025-05-19T20:54:15.894Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:54:15.897Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:54:15.906Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;
+2025-05-19T20:54:15.916Z - Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'SequelizeMeta' AND TABLE_SCHEMA = 'coach_ally'
+2025-05-19T20:54:15.920Z - Executing (default): SHOW INDEX FROM `SequelizeMeta`
+2025-05-19T20:54:15.924Z - Executing (default): SELECT `name` FROM `SequelizeMeta` AS `SequelizeMeta` ORDER BY `SequelizeMeta`.`name` ASC;

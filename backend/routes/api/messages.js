@@ -8,7 +8,10 @@ const {
     markMessagesAsReadRules,
     validateRequest
 } = require('../../middleware/validators/messageValidator');
-const authMiddleware = require('../../middleware/authMiddleware'); // Assuming this path
+const authMiddleware = require('../../middleware/authMiddleware'); // Use the real auth middleware
+const logger = require('../../utils/logger');
+
+logger.info('MESSAGE ROUTER FILE LOADED'); // Confirm this file is loaded by Node
 
 // @route   POST /
 // @desc    Send a new message in a conversation
@@ -28,9 +31,25 @@ router.post(
 // (Mounted at /api/conversations/:conversationId/messages)
 router.get(
     '/',
+    (req, res, next) => {
+        logger.info(`MESSAGE ROUTE: Initial entry for GET / (convId: ${req.params.conversationId})`);
+        next();
+    },
     authMiddleware,
+    (req, res, next) => {
+        logger.info(`MESSAGE ROUTE: After authMiddleware for GET / (user: ${req.user ? req.user.id : 'null'})`);
+        next();
+    },
     getMessagesRules(),
+    (req, res, next) => {
+        logger.info('MESSAGE ROUTE: After getMessagesRules for GET /');
+        next();
+    },
     validateRequest,
+    (req, res, next) => {
+        logger.info('MESSAGE ROUTE: After validateRequest for GET /');
+        next();
+    },
     messageController.getMessagesHandler
 );
 

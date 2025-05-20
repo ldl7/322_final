@@ -21,10 +21,12 @@ const socketAuthMiddleware = async (socket, next) => {
     }
 
     try {
-        // Ensure you are using the correct secret key from your config
-        const jwtSecret = process.env.JWT_SECRET || config.development.jwt_secret;
+        // Ensure you are using the correct secret key from config.js
+        const jwtSecret = config.jwt.secret;
+        logger.info(`WS Auth: JWT Secret Used: [${jwtSecret ? '***SECRET EXISTS***' : 'UNDEFINED'}]`);
+        
         if (!jwtSecret) {
-            logger.error('JWT_SECRET is not defined. WebSocket authentication cannot proceed.');
+            logger.error('WS Auth: config.jwt.secret is indeed falsy.');
             const err = new Error('Authentication error: Server configuration issue');
             err.data = { content: 'Server configuration error for JWT.' };
             return next(err);

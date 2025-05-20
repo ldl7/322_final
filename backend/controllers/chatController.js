@@ -20,10 +20,9 @@
  * PUT    /api/conversations/:id - Update conversation
  * DELETE /api/conversations/:id - Delete conversation
  */
-
 const { sequelize, User, UserConversation, Conversation, Message } = require('../models');
+const { Op } = require('sequelize'); // <--- ADD THIS LINE
 const logger = require('../utils/logger');
-
 // File will be implemented with:
 // 1. Create new conversations (direct or group)
 // 2. List user's conversations with pagination
@@ -43,29 +42,34 @@ const getOrCreateConversation = async (req, res) => {
   logger.info('Request body:', JSON.stringify(req.body, null, 2));
   logger.info('Authenticated user:', JSON.stringify(req.user, null, 2));
   
-  let { participantId } = req.body;
+  let { participantUserIds } = req.body;
   const currentUserId = req.user?.id;
-
-  logger.info(`Current User ID: ${currentUserId}, Requested Participant ID: ${participantId}`);
-
+  let participantId;
+  
   if (!currentUserId) {
     const errorMsg = 'Current user ID is missing';
     logger.error(errorMsg);
     return res.status(401).json({ status: 'error', message: 'Authentication required' });
   }
   
+  // Extract participantId from participantUserIds array if provided
+  if (participantUserIds && Array.isArray(participantUserIds) && participantUserIds.length > 0) {
+    participantId = participantUserIds[0]; // Take the first one for a direct chat
+    logger.info(`Extracted participantId from participantUserIds array: ${participantId}`);
+  }
+  
+  logger.info(`Current User ID: ${currentUserId}, Requested Participant ID: ${participantId}`);
+  
   // If no participant ID is provided or it's invalid, find another valid user
   if (!participantId || participantId === currentUserId) {
     logger.info('Finding a valid participant as none was provided or invalid one was supplied');
     try {
-      // Find any other user who is not the current user
       const otherUser = await User.findOne({
         where: {
-          id: { [sequelize.Op.ne]: currentUserId } // Not equal to current user
+          id: { [Op.ne]: currentUserId } // Using Op from sequelize import
         },
         attributes: ['id', 'username', 'email']
-      });
-      
+      })
       if (otherUser) {
         participantId = otherUser.id;
         logger.info(`Using alternate participant: ${otherUser.username} (${otherUser.id})`);

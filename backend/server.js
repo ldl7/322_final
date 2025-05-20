@@ -17,8 +17,8 @@ const initializeUserRoutes = require('./routes/users');
 const userRoutes = initializeUserRoutes(express.Router);
 const initializeConversationRoutes = require('./routes/conversations');
 const conversationRoutes = initializeConversationRoutes(express.Router);
-const initializeMessageRoutes = require('./routes/messages');
-const messageRoutes = initializeMessageRoutes(express.Router);
+const aiChatRoutes = require('./routes/aiChat');
+// Message routes are now imported and mounted within conversation routes
 
 // WebSocket middleware and event handlers
 const socketAuthMiddleware = require('./middleware/websocket/auth');
@@ -79,7 +79,8 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/conversations', conversationRoutes);
-app.use('/api/messages', messageRoutes);
+app.use('/api/ai', aiChatRoutes);
+// Removed top-level message routes - these should only be accessed via conversations
 
 // Health Check Endpoint
 app.get('/health', (req, res) => {

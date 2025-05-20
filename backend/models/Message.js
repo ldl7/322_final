@@ -87,7 +87,7 @@ module.exports = (sequelize) => {
       }
     },
     metadata: {
-      type: DataTypes.JSONB,
+      type: DataTypes.JSON, // Changed from DataTypes.JSONB to DataTypes.JSON for MySQL compatibility
       allowNull: true,
     }
   }, {

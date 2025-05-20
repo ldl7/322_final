@@ -20,12 +20,12 @@ module.exports = (sequelize) => {
     static associate(models) {
       // Define associations to User and Conversation
       UserConversation.belongsTo(models.User, { 
-        foreignKey: 'user_id',
+        foreignKey: 'userId',
         as: 'user'
       });
       
       UserConversation.belongsTo(models.Conversation, { 
-        foreignKey: 'conversation_id',
+        foreignKey: 'conversationId',
         as: 'conversation'
       });
     }
@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
 
   UserConversation.init({
     // No 'id' field - using composite primary key instead
-    user_id: {
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true, // Part of composite primary key
@@ -43,8 +43,9 @@ module.exports = (sequelize) => {
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
+      field: 'user_id' // Explicitly map to DB column
     },
-    conversation_id: {
+    conversationId: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true, // Part of composite primary key
@@ -54,6 +55,7 @@ module.exports = (sequelize) => {
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
+      field: 'conversation_id' // Explicitly map to DB column
     },
     // Timestamps with underscored fields
     createdAt: {
@@ -94,16 +96,16 @@ module.exports = (sequelize) => {
     const queryInterface = sequelize.getQueryInterface();
     
     // Add composite unique index to prevent duplicate user-conversation pairs
-    const indexes = await queryInterface.showIndex('UserConversations');
+    const indexes = await queryInterface.showIndex('userconversations');
     const hasCompositeIndex = indexes.some(index => 
       index.name === 'user_conversation_unique' || 
       (index.fields && index.fields.length === 2 && 
-       index.fields.some(f => f.attribute === 'userId') && 
-       index.fields.some(f => f.attribute === 'conversationId'))
+       index.fields.some(f => f.attribute === 'user_id') && 
+       index.fields.some(f => f.attribute === 'conversation_id'))
     );
     
     if (!hasCompositeIndex) {
-      await queryInterface.addIndex('UserConversations', ['userId', 'conversationId'], {
+      await queryInterface.addIndex('userconversations', ['user_id', 'conversation_id'], {
         unique: true,
         name: 'user_conversation_unique'
       });

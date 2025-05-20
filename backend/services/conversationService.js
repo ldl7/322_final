@@ -11,15 +11,20 @@ const logger = require('../utils/logger'); // Adjust path for your logger
  */
 const findExistingDirectConversation = async (userId1, userId2) => {
     try {
+        logger.info(`Finding existing direct conversation between users ${userId1} and ${userId2}`);
         // Find conversations involving userId1
         const conversationsOfUser1 = await UserConversation.findAll({
             where: { userId: userId1 },
             attributes: ['conversationId'],
         });
 
-        if (!conversationsOfUser1.length) return null;
+        if (!conversationsOfUser1.length) {
+            logger.info(`No conversations found for user ${userId1}`);
+            return null;
+        }
 
         const conversationIdsOfUser1 = conversationsOfUser1.map(uc => uc.conversationId);
+        logger.info(`Found ${conversationIdsOfUser1.length} conversations for user ${userId1}`);
 
         // Find direct conversations among these that also involve userId2
         const directConversation = await Conversation.findOne({
@@ -29,7 +34,7 @@ const findExistingDirectConversation = async (userId1, userId2) => {
             },
             include: [{
                 model: UserConversation,
-                as: 'userConversations',
+                as: 'userConversations', // This matches the alias in Conversation model
                 attributes: ['userId'],
                 where: { userId: userId2 }, // Ensure the other user is part of this conversation
                 required: true // This makes it an INNER JOIN on this include
@@ -133,7 +138,7 @@ const getUserConversations = async (userId, { page = 1, limit = 20 } = {}) => {
             where: { userId },
             include: [{
                 model: Conversation,
-                as: 'conversation',
+                as: 'conversation', // This matches the alias in UserConversation model
                 include: [
                     { model: User, as: 'participants', attributes: ['id', 'username', 'email'], through: { attributes: [] } },
                     {

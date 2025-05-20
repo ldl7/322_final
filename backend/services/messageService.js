@@ -1,7 +1,8 @@
 // Contains business logic and data access for message operations
-const { Op } = require('sequelize');
-const { Message, User, Conversation, UserConversation } = require('../models'); // Adjust path if your models are elsewhere
+const { Op, col } = require('sequelize');
+const { Message, User, Conversation, UserConversation, sequelize } = require('../models'); // Adjust path if your models are elsewhere
 const logger = require('../utils/logger'); // Adjust path for your logger
+const openAIService = require('../../openai-integration/src/services/openaiService'); // Import OpenAI service
 
 /**
  * Sends a new message in a conversation.
@@ -54,11 +55,9 @@ const sendMessage = async (senderId, conversationId, content, type = 'text', met
         // This helps in ordering conversations by the latest message.
         await conversation.changed('updatedAt', true); // Mark 'updatedAt' as changed
         await conversation.update({ updatedAt: new Date() }); // Force update, or simply save if no other changes
-        // conversation.changed('updatedAt', true) might not be strictly necessary if Sequelize handles it with .save()
-        // await conversation.save(); // Alternative way to update timestamps if other fields are also modified
 
         // 4. Fetch the message again with sender details to return the full object (as expected by WebSocket handlers)
-        const newMessageWithSender = await Message.findByPk(message.id, {
+        const userMessageWithSender = await Message.findByPk(message.id, {
             include: [{
                 model: User,
                 as: 'sender',
@@ -66,8 +65,70 @@ const sendMessage = async (senderId, conversationId, content, type = 'text', met
             }]
         });
 
-        logger.info(`Message ${newMessageWithSender.id} sent successfully by ${senderId} in conversation ${conversationId}`);
-        return newMessageWithSender;
+        logger.info(`User message ${userMessageWithSender.id} sent successfully by ${senderId} in conversation ${conversationId}`);
+        
+        // 5. Generate AI response
+        let aiMessageWithSender = null;
+        try {
+            // Fetch recent conversation history for context
+            const history = await Message.findAll({
+                where: { conversationId },
+                order: [[sequelize.col('created_at'), 'DESC']], // Use sequelize.col for proper column name
+                limit: 10, // Get last 10 messages for context
+                include: [{
+                    model: User,
+                    as: 'sender',
+                    attributes: ['id', 'username']
+                }]
+            });
+            
+            // Format history for OpenAI API
+            const formattedHistory = history.reverse().map(msg => ({
+                role: msg.sender.id === senderId ? 'user' : 'assistant',
+                content: msg.content
+            }));
+            
+            // Get AI coach user ID
+            const AI_COACH_USER_ID = process.env.AI_COACH_USER_ID || 'bffc93b4-f1d1-4395-bd7e-aef35648ed4e';
+            
+            // Call OpenAI service to generate response
+            logger.info(`Generating AI response for message: ${content.substring(0, 50)}${content.length > 50 ? '...' : ''}`);
+            const aiResponseContent = await openAIService.generateReply(formattedHistory, content);
+            
+            if (aiResponseContent) {
+                // Create AI message in database
+                const aiMessage = await Message.create({
+                    senderId: AI_COACH_USER_ID,
+                    conversationId,
+                    content: aiResponseContent,
+                    type: 'text',
+                    status: 'sent'
+                });
+                
+                // Update conversation timestamp again
+                await conversation.update({ updatedAt: new Date() });
+                
+                // Fetch AI message with sender details
+                aiMessageWithSender = await Message.findByPk(aiMessage.id, {
+                    include: [{
+                        model: User,
+                        as: 'sender',
+                        attributes: ['id', 'username', 'email']
+                    }]
+                });
+                
+                logger.info(`AI message ${aiMessageWithSender.id} created for conversation ${conversationId}`);
+            }
+        } catch (aiError) {
+            logger.error(`Error generating AI response: ${aiError.message}`, aiError);
+            // Don't let AI errors block the user message flow
+        }
+        
+        // Return both messages
+        return {
+            userMessage: userMessageWithSender,
+            aiMessage: aiMessageWithSender // Will be null if AI didn't respond or errored
+        };
     } catch (error) {
         logger.error('Error sending message:', error);
         if (!error.status) error.status = 500; // Default to server error if not set
@@ -87,30 +148,40 @@ const sendMessage = async (senderId, conversationId, content, type = 'text', met
  * @returns {Promise<object>} An object containing messages and pagination info.
  */
 const getMessages = async (conversationId, userId, { page, limit = 30, beforeMessageId, afterMessageId } = {}) => {
+    logger.info(`MESSAGE SERVICE: Entered getMessages for convId: ${conversationId}, userId: ${userId}`);
     logger.info(`Fetching messages for conversation ${conversationId}, user ${userId}, options: ${JSON.stringify({ page, limit, beforeMessageId, afterMessageId })}`);
 
     try {
         // 1. Verify conversation exists and user is a participant
+        logger.info(`MESSAGE SERVICE: Finding conversation ${conversationId} for participation check.`);
         const conversation = await Conversation.findByPk(conversationId, {
             include: [{
                 model: UserConversation,
-                as: 'userConversations',
+                as: 'userConversations', // Ensure this alias is correct as per Conversation.js model
                 attributes: ['userId']
             }]
         });
 
         if (!conversation) {
-            throw new Error(`Conversation with ID ${conversationId} not found.`);
+            logger.warn(`MESSAGE SERVICE: Conversation ${conversationId} not found during getMessages.`);
+            // For a 404 from the service layer, you might want a custom error
+            const notFoundError = new Error(`Conversation with ID ${conversationId} not found.`);
+            notFoundError.status = 404;
+            throw notFoundError;
         }
+
+        logger.info(`MESSAGE SERVICE: Conversation ${conversationId} found.`);
 
         const isParticipant = conversation.userConversations.some(uc => uc.userId === userId);
         if (!isParticipant) {
+            logger.warn(`MESSAGE SERVICE: User ${userId} is not a participant of conversation ${conversationId}. Access denied.`);
             const authError = new Error(`User ${userId} is not a participant of conversation ${conversationId}.`);
             authError.status = 403; // Forbidden
             throw authError;
         }
+        logger.info(`MESSAGE SERVICE: User ${userId} is participant. Fetching messages.`);
 
-        // 2. Construct query options for messages
+        // Default query options
         const queryOptions = {
             where: { conversationId },
             include: [{
@@ -118,7 +189,7 @@ const getMessages = async (conversationId, userId, { page, limit = 30, beforeMes
                 as: 'sender',
                 attributes: ['id', 'username', 'email']
             }],
-            order: [['createdAt', 'DESC']], // Get newest messages first
+            order: [[sequelize.col('created_at'), 'DESC']], // Use sequelize.col() to reference the actual DB column name
             limit
         };
 
@@ -131,7 +202,7 @@ const getMessages = async (conversationId, userId, { page, limit = 30, beforeMes
              const cursorMessage = await Message.findByPk(afterMessageId, { attributes: ['createdAt'] });
             if (cursorMessage) {
                 queryOptions.where.createdAt = { [Op.gt]: cursorMessage.createdAt };
-                queryOptions.order = [['createdAt', 'ASC']]; // For polling new messages, get oldest of the new ones first, then reverse on client
+                queryOptions.order = [[sequelize.col('created_at'), 'ASC']]; // Use sequelize.col() here too
             }
         } else if (page) {
             queryOptions.offset = (page - 1) * limit;
