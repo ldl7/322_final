@@ -2,7 +2,7 @@
 const { Op, col } = require('sequelize');
 const { Message, User, Conversation, UserConversation, sequelize } = require('../models'); // Adjust path if your models are elsewhere
 const logger = require('../utils/logger'); // Adjust path for your logger
-const openAIService = require('../../openai-integration/src/services/openaiService'); // Import OpenAI service
+const aiService = require('./aiService'); // Import local AI service
 
 /**
  * Sends a new message in a conversation.
@@ -93,7 +93,8 @@ const sendMessage = async (senderId, conversationId, content, type = 'text', met
             
             // Call OpenAI service to generate response
             logger.info(`Generating AI response for message: ${content.substring(0, 50)}${content.length > 50 ? '...' : ''}`);
-            const aiResponseContent = await openAIService.generateReply(formattedHistory, content);
+            // Call AI service with formatted history and the latest message
+            const aiResponseContent = await aiService.generateResponse(formattedHistory, senderId);
             
             if (aiResponseContent) {
                 // Create AI message in database
