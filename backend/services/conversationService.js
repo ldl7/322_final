@@ -1,232 +1,222 @@
 // Contains business logic and data access for conversation operations
 const { Op } = require('sequelize');
-const { Conversation, User, UserConversation, Message, sequelize } = require('../models'); // Adjust path if your models are elsewhere
-const logger = require('../utils/logger'); // Adjust path for your logger
+const { Conversation, User, UserConversation, Message, sequelize } = require('../models');
+const logger = require('../utils/logger');
+
+// AI Coach user ID - this should be set in your environment variables
+const AI_COACH_USER_ID = process.env.AI_COACH_USER_ID || 'bffc93b4-f1d1-4395-bd7e-aef35648ed4e';
 
 /**
- * Checks if a direct conversation already exists between two users.
- * @param {string} userId1 - ID of the first user.
- * @param {string} userId2 - ID of the second user.
- * @returns {Promise<Conversation|null>} The existing conversation or null.
+ * Finds the user's AI Coach conversation
+ * @param {string} userId - ID of the user
+ * @returns {Promise<Conversation|null>} The existing conversation or null
  */
-const findExistingDirectConversation = async (userId1, userId2) => {
+const findUserAICoachConversation = async (userId) => {
     try {
-        logger.info(`Finding existing direct conversation between users ${userId1} and ${userId2}`);
-        // Find conversations involving userId1
-        const conversationsOfUser1 = await UserConversation.findAll({
-            where: { userId: userId1 },
-            attributes: ['conversationId'],
-        });
-
-        if (!conversationsOfUser1.length) {
-            logger.info(`No conversations found for user ${userId1}`);
-            return null;
-        }
-
-        const conversationIdsOfUser1 = conversationsOfUser1.map(uc => uc.conversationId);
-        logger.info(`Found ${conversationIdsOfUser1.length} conversations for user ${userId1}`);
-
-        // Find direct conversations among these that also involve userId2
-        const directConversation = await Conversation.findOne({
+        logger.info(`Finding AI Coach conversation for user ${userId}`);
+        const conversation = await Conversation.findOne({
             where: {
-                id: { [Op.in]: conversationIdsOfUser1 },
+                createdBy: userId,
                 type: 'direct',
             },
-            include: [{
-                model: UserConversation,
-                as: 'userConversations', // This matches the alias in Conversation model
-                attributes: ['userId'],
-                where: { userId: userId2 }, // Ensure the other user is part of this conversation
-                required: true // This makes it an INNER JOIN on this include
-            }],
+            include: [
+                {
+                    model: User,
+                    as: 'participants',
+                    attributes: ['id', 'username'],
+                    through: { attributes: [] },
+                    where: { id: AI_COACH_USER_ID },
+                    required: true
+                }
+            ]
         });
-        
-        // Further check to ensure ONLY these two users are in the direct conversation
-        if (directConversation) {
-            const participants = await directConversation.getParticipants({ attributes: ['id'] });
-            if (participants.length === 2 && participants.some(p => p.id === userId1) && participants.some(p => p.id === userId2)) {
-                return directConversation;
+
+        if (conversation) {
+            // Verify the user is also a participant (should be implied by createdBy and direct type)
+            const userIsParticipant = await conversation.hasParticipant(userId);
+            if (userIsParticipant) {
+                logger.info(`Found existing AI Coach conversation ${conversation.id} for user ${userId}`);
+                return conversation;
             }
         }
+        logger.info(`No existing AI Coach conversation found for user ${userId} with AI as participant.`);
         return null;
-
     } catch (error) {
-        logger.error('Error finding existing direct conversation:', error);
-        throw error; // Re-throw to be handled by the caller
+        logger.error(`Error in findUserAICoachConversation for user ${userId}:`, error);
+        throw error;
     }
 };
 
 /**
- * Creates a new conversation.
+ * Creates a new AI conversation for a user
  * @param {string} creatorId - The ID of the user creating the conversation.
- * @param {string[]} participantUserIds - An array of user IDs to be included in the conversation.
- * @param {string} type - Type of conversation ('direct' or 'group'). Defaults to 'direct'.
- * @param {string|null} name - Name of the conversation, primarily for group chats.
- * @returns {Promise<Conversation>} The created conversation object with participants.
+ * @param {string[]} participantUserIds - Ignored, as we always use AI_COACH_USER_ID
+ * @param {string} type - Type of conversation (defaults to 'direct' for AI conversations)
+ * @param {string|null} name - Optional name for the conversation
+ * @returns {Promise<Conversation>} The created or existing conversation object
  */
-const createConversation = async (creatorId, participantUserIds, type = 'direct', name = null) => {
-    logger.info(`Creating conversation: type=${type}, creatorId=${creatorId}, participants=${participantUserIds.join(',')}, name=${name}`);
-    
-    if (!creatorId || !participantUserIds || participantUserIds.length === 0) {
-        throw new Error('Creator ID and at least one participant are required.');
+const createConversation = async (creatorId, participantUserIds = [], type = 'direct', name = null) => {
+    logger.info(`Creating AI conversation for creatorId=${creatorId}`);
+
+    if (!creatorId) {
+        throw new Error('Creator ID is required.');
     }
 
-    // Ensure creator is also part of the participant list for simplicity in UserConversation entries
-    const allParticipantIds = Array.from(new Set([creatorId, ...participantUserIds]));
+    if (creatorId === AI_COACH_USER_ID) {
+        throw new Error('AI cannot create a conversation with itself');
+    }
 
-    if (type === 'direct') {
-        if (allParticipantIds.length !== 2) {
-            throw new Error('Direct conversations must have exactly two participants (including the creator).');
-        }
-        const existingConversation = await findExistingDirectConversation(allParticipantIds[0], allParticipantIds[1]);
-        if (existingConversation) {
-            logger.info(`Returning existing direct conversation ${existingConversation.id} for users ${allParticipantIds.join(', ')}`);
-            // Optionally, load participants if not already loaded correctly
-            return Conversation.findByPk(existingConversation.id, { include: [{ model: User, as: 'participants', attributes: ['id', 'username', 'email'] }] });
-        }
-    } else if (type === 'group' && !name) {
-        throw new Error('Group conversations must have a name.');
+    // Check if a conversation already exists for this user with the AI Coach
+    let conversation = await findUserAICoachConversation(creatorId);
+    if (conversation) {
+        logger.info(`Returning existing AI conversation ${conversation.id} for user ${creatorId}`);
+        return conversation;
     }
 
     const transaction = await sequelize.transaction();
     try {
-        const conversation = await Conversation.create({
-            type,
-            name: type === 'group' ? name : null, // Name is typically for group chats
+        const conversationName = name || `Chat with AI Coach`;
+
+        // Create the conversation with the user and AI coach as participants
+        conversation = await Conversation.create({
+            type: 'direct',
+            name: conversationName,
             createdBy: creatorId,
         }, { transaction });
 
+        // Add both the user and AI coach as participants
+        const allParticipantIds = [creatorId, AI_COACH_USER_ID];
         const userConversationEntries = allParticipantIds.map(userId => ({
             userId,
             conversationId: conversation.id,
         }));
 
         await UserConversation.bulkCreate(userConversationEntries, { transaction });
-
         await transaction.commit();
 
-        // Fetch the conversation again with participants to return the full object
-        const newConversationWithParticipants = await Conversation.findByPk(conversation.id, {
-            include: [
-                { model: User, as: 'participants', attributes: ['id', 'username', 'email'], through: { attributes: [] } },
-                { model: User, as: 'creator', attributes: ['id', 'username', 'email'] }
-            ]
-        });
-        logger.info(`Conversation ${newConversationWithParticipants.id} created successfully.`);
-        return newConversationWithParticipants;
-    } catch (error) {
-        await transaction.rollback();
-        logger.error('Error creating conversation:', error);
-        throw error; // Re-throw to be handled by controller/error handler
-    }
-};
-
-/**
- * Retrieves all conversations for a given user, with pagination and last message.
- * @param {string} userId - The ID of the user.
- * @param {object} options - Pagination options.
- * @param {number} options.page - The page number (default: 1).
- * @param {number} options.limit - Number of conversations per page (default: 20).
- * @returns {Promise<object>} An object containing conversations and pagination info.
- */
-const getUserConversations = async (userId, { page = 1, limit = 20 } = {}) => {
-    logger.info(`Fetching conversations for user ${userId}, page=${page}, limit=${limit}`);
-    const offset = (page - 1) * limit;
-
-    try {
-        const { count, rows: userConversations } = await UserConversation.findAndCountAll({
-            where: { userId },
-            include: [{
-                model: Conversation,
-                as: 'conversation', // This matches the alias in UserConversation model
-                include: [
-                    { model: User, as: 'participants', attributes: ['id', 'username', 'email'], through: { attributes: [] } },
-                    {
-                        model: Message,
-                        as: 'messages',
-                        attributes: ['id', 'content', 'senderId', 'createdAt', 'type'],
-                        limit: 1, // Get only the last message
-                        order: [['createdAt', 'DESC']],
-                        include: [{model: User, as: 'sender', attributes: ['id', 'username']}]
-                    }
-                ]
-            }],
-            order: [[{model: Conversation, as: 'conversation'}, 'updatedAt', 'DESC']], // Order conversations by recent activity
-            limit,
-            offset,
-            distinct: true, // Important for count when using includes
-        });
-
-        const conversations = userConversations.map(uc => {
-            const conv = uc.conversation.toJSON(); // Work with plain object
-            // Simplify the last message structure
-            conv.lastMessage = conv.messages && conv.messages.length > 0 ? conv.messages[0] : null;
-            delete conv.messages; // Remove the array of messages as we only needed the last one
-            return conv;
-        });
-
-        return {
-            conversations,
-            totalPages: Math.ceil(count / limit),
-            currentPage: page,
-            totalConversations: count
-        };
-    } catch (error) {
-        logger.error(`Error fetching conversations for user ${userId}:`, error);
-        throw error;
-    }
-};
-
-/**
- * Retrieves a specific conversation by its ID, ensuring the requesting user is a participant.
- * @param {string} conversationId - The ID of the conversation.
- * @param {string} userId - The ID of the user requesting the conversation (for auth check).
- * @returns {Promise<Conversation|null>} The conversation object or null if not found or user is not a participant.
- */
-const getConversationById = async (conversationId, userId) => {
-    logger.info(`Fetching conversation ${conversationId} for user ${userId}`);
-    try {
-        const conversation = await Conversation.findByPk(conversationId, {
+        // Fetch the complete conversation with participants
+        const newConversationWithDetails = await Conversation.findByPk(conversation.id, {
             include: [
                 { 
                     model: User, 
                     as: 'participants', 
                     attributes: ['id', 'username', 'email'], 
-                    through: { attributes: [] } // Don't need join table attributes here
+                    through: { attributes: [] } 
                 },
-                { model: User, as: 'creator', attributes: ['id', 'username', 'email'] },
-                // Optionally include last few messages or other relevant details
+                { 
+                    model: User, 
+                    as: 'creator', 
+                    attributes: ['id', 'username', 'email'] 
+                }
             ]
         });
 
-        if (!conversation) {
-            logger.warn(`Conversation ${conversationId} not found.`);
-            return null;
-        }
-
-        // Check if the requesting user is a participant
-        const isParticipant = conversation.participants.some(participant => participant.id === userId);
-        if (!isParticipant) {
-            logger.warn(`User ${userId} is not a participant of conversation ${conversationId}. Access denied.`);
-            // Throw an error or return null based on how you want to handle unauthorized access
-            const error = new Error('Access denied: You are not a participant of this conversation.');
-            error.status = 403; // Forbidden
-            throw error;
-        }
-        
-        logger.info(`Conversation ${conversationId} fetched successfully for user ${userId}`);
-        return conversation;
+        logger.info(`AI Conversation ${newConversationWithDetails.id} created successfully for user ${creatorId}.`);
+        return newConversationWithDetails;
     } catch (error) {
-        logger.error(`Error fetching conversation ${conversationId} for user ${userId}:`, error);
-        if (!error.status) error.status = 500; // Default to server error if not set
+        await transaction.rollback();
+        logger.error('Error creating AI conversation:', error);
         throw error;
     }
+};
+
+/**
+ * Retrieves the AI conversation for a given user
+ * @param {string} userId - The ID of the user
+ * @param {object} options - Pagination options (kept for compatibility but not used)
+ * @returns {Promise<object>} An object containing the conversation and pagination info
+ */
+const getUserConversations = async (userId, { page = 1, limit = 1 } = {}) => {
+    logger.info(`Fetching AI conversation for user ${userId}`);
+    
+    // Find the user's AI conversation
+    const conversation = await findUserAICoachConversation(userId);
+
+    if (!conversation) {
+        return { conversations: [], totalPages: 0, currentPage: 1, totalConversations: 0 };
+    }
+
+    // Fetch the last message for this conversation
+    const lastMessage = await Message.findOne({
+        where: { conversationId: conversation.id },
+        order: [['createdAt', 'DESC']],
+        include: [{ 
+            model: User, 
+            as: 'sender', 
+            attributes: ['id', 'username'] 
+        }]
+    });
+    
+    // Prepare the conversation data
+    const convJSON = conversation.toJSON();
+    convJSON.lastMessage = lastMessage ? lastMessage.toJSON() : null;
+
+    // Ensure participants are included in the response
+    if (!convJSON.participants) {
+        const participants = await conversation.getParticipants({ 
+            attributes: ['id', 'username', 'email'], 
+            raw: true 
+        });
+        convJSON.participants = participants;
+    }
+
+    return {
+        conversations: [convJSON],
+        totalPages: 1,
+        currentPage: 1,
+        totalConversations: 1
+    };
+};
+
+/**
+ * Retrieves a specific conversation by its ID, ensuring the requesting user is the creator
+ * @param {string} conversationId - The ID of the conversation
+ * @param {string} requestingUserId - The ID of the user requesting the conversation
+ * @returns {Promise<Conversation>} The conversation object
+ * @throws {Error} If conversation not found or user is not authorized
+ */
+const getConversationById = async (conversationId, requestingUserId) => {
+    logger.info(`Fetching AI conversation ${conversationId} for user ${requestingUserId}`);
+    
+    const conversation = await Conversation.findByPk(conversationId, {
+        include: [
+            { 
+                model: User, 
+                as: 'participants', 
+                attributes: ['id', 'username', 'email'], 
+                through: { attributes: [] } 
+            },
+            { 
+                model: User, 
+                as: 'creator', 
+                attributes: ['id', 'username', 'email'] 
+            }
+        ]
+    });
+
+    if (!conversation) {
+        logger.warn(`AI Conversation ${conversationId} not found.`);
+        const error = new Error('Conversation not found');
+        error.status = 404;
+        throw error;
+    }
+
+    // User can only access conversations they created (their AI chat)
+    // or if the requestingUserId is the AI_COACH_USER_ID
+    if (conversation.createdBy !== requestingUserId && requestingUserId !== AI_COACH_USER_ID) {
+        logger.warn(`User ${requestingUserId} is not authorized to view AI conversation ${conversationId}.`);
+        const error = new Error('Access denied: You are not authorized to view this conversation.');
+        error.status = 403;
+        throw error;
+    }
+    
+    return conversation;
 };
 
 module.exports = {
     createConversation,
     getUserConversations,
     getConversationById,
-    // findExistingDirectConversation, // Not typically exported unless needed elsewhere directly
+    findUserAICoachConversation // Export if needed by other services
 };
 

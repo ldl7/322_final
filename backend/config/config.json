@@ -4,20 +4,33 @@
     "password": "Loloreno1",
     "database": "coach_ally",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "port": 3306,
+    "dialect": "mysql",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "SequelizeData"
   },
   "test": {
     "username": "root",
     "password": "Loloreno1",
-    "database": "coach_ally",
+    "database": "coach_ally_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": false,
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "SequelizeData"
   },
   "production": {
-    "username": "root",
-    "password": "Loloreno1",
-    "database": "coach_ally",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "mysql",
+    "logging": false,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "SequelizeData"
   }
 }

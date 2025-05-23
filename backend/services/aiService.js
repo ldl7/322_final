@@ -1,4 +1,4 @@
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai');
 const logger = require('../utils/logger');
 
 class AIService {
@@ -6,21 +6,25 @@ class AIService {
     if (!process.env.OPENAI_API_KEY) {
       logger.warn('OpenAI API key not configured. AI features will be disabled.');
       this.openai = null;
+      this.isConfigured = false; // Add a flag to check if configured
       return;
     }
 
-    const configuration = new Configuration({
+    // Directly instantiate the OpenAI client
+    this.openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    this.openai = new OpenAIApi(configuration);
+    this.isConfigured = true; // Mark as configured
     this.model = process.env.OPENAI_MODEL || 'gpt-3.5-turbo';
-    this.systemPrompt = process.env.COACH_ALLY_SYSTEM_PROMPT || 
+    this.systemPrompt = process.env.COACH_ALLY_SYSTEM_PROMPT ||
       'You are Coach Ally, a supportive and encouraging AI assistant. ' +
       'Help users with their tasks, provide guidance, and offer helpful suggestions.';
+    logger.info(`OpenAI Service configured with model: ${this.model}`);
   }
 
   async generateResponse(messages, userId) {
-    if (!this.openai) {
+    if (!this.isConfigured || !this.openai) { // Check the flag
+      logger.warn('AIService.generateResponse called but OpenAI service is not configured.');
       throw new Error('OpenAI service is not configured');
     }
 
@@ -31,8 +35,9 @@ class AIService {
       ];
 
       logger.info(`Generating AI response for user ${userId} with model ${this.model}`);
-      
-      const response = await this.openai.createChatCompletion({
+
+      // Use the new API structure for chat completions
+      const response = await this.openai.chat.completions.create({
         model: this.model,
         messages: conversation,
         temperature: 0.7,
@@ -40,15 +45,22 @@ class AIService {
         user: userId, // Associate chat with user for abuse monitoring
       });
 
-      return response.data.choices[0].message.content.trim();
+      return response.choices[0].message.content.trim();
     } catch (error) {
-      logger.error('Error generating AI response:', error);
+      logger.error('Error generating AI response:', {
+        message: error.message,
+        name: error.name,
+        // Consider logging parts of the error object if it's an APIError from OpenAI
+        ...(error.response && error.response.data && { responseData: error.response.data }),
+        stack: error.stack
+      });
       throw new Error('Failed to generate AI response');
     }
   }
 
   async generateTaskSuggestions(userTasks, userId) {
-    if (!this.openai) {
+    if (!this.isConfigured || !this.openai) { // Check the flag
+      logger.warn('AIService.generateTaskSuggestions called but OpenAI service is not configured.');
       throw new Error('OpenAI service is not configured');
     }
 
@@ -62,6 +74,7 @@ class AIService {
         'Consider due dates, priorities, and task relationships. ' +
         'Be encouraging and provide actionable advice.';
 
+      // Assuming generateResponse is updated as above
       const response = await this.generateResponse(
         [{ role: 'user', content: prompt }],
         userId
@@ -75,7 +88,8 @@ class AIService {
   }
 
   async analyzeTask(task, userId) {
-    if (!this.openai) {
+    if (!this.isConfigured || !this.openai) { // Check the flag
+      logger.warn('AIService.analyzeTask called but OpenAI service is not configured.');
       throw new Error('OpenAI service is not configured');
     }
 
@@ -87,6 +101,7 @@ class AIService {
         'Please analyze this task and provide suggestions for breaking it down into smaller, ' +
         'more manageable steps. Also, suggest any resources or considerations that might help with completion.';
 
+      // Assuming generateResponse is updated as above
       const response = await this.generateResponse(
         [{ role: 'user', content: prompt }],
         userId

@@ -1,5 +1,5 @@
 const TaskService = require('../services/taskService');
-const httpStatus = require('http-status');
+const httpStatus = require('http-status-codes');
 const logger = require('../utils/logger');
 
 class TaskController {

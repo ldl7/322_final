@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const TaskController = require('../controllers/taskController');
-const { authenticate } = require('../middleware/auth');
+const { authenticateJWT } = require('../middleware/auth');
 const { body, param, query } = require('express-validator');
-const { validate } = require('../middleware/validation');
+const { validateRequest } = require('../middleware/validators/commonValidator');
 
 // Apply authentication middleware to all task routes
-router.use(authenticate);
+router.use(authenticateJWT);
 
 // Create a new task
 router.post(
@@ -17,8 +17,8 @@ router.post(
     body('dueDate').optional().isISO8601().withMessage('Invalid date format'),
     body('priority').optional().isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
     body('category').optional().trim(),
-    validate,
   ],
+  validateRequest,
   TaskController.createTask
 );
 
@@ -28,9 +28,9 @@ router.get(
   [
     query('status').optional().isIn(['all', 'completed', 'pending']).withMessage('Invalid status'),
     query('limit').optional().isInt({ min: 1, max: 100 }).toInt(),
-    query('offset').optional().isInt({ min: 0 }).toInt(),
-    validate,
+    query('offset').optional().isInt({ min: 0 }).toInt()
   ],
+  validateRequest,
   TaskController.getTasks
 );
 
@@ -38,9 +38,9 @@ router.get(
 router.get(
   '/:taskId',
   [
-    param('taskId').isUUID().withMessage('Invalid task ID'),
-    validate,
+    param('taskId').isUUID().withMessage('Invalid task ID')
   ],
+  validateRequest,
   TaskController.getTask
 );
 
@@ -54,9 +54,9 @@ router.put(
     body('dueDate').optional().isISO8601().withMessage('Invalid date format'),
     body('priority').optional().isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
     body('completed').optional().isBoolean().withMessage('Completed must be a boolean'),
-    body('category').optional().trim(),
-    validate,
+    body('category').optional().trim()
   ],
+  validateRequest,
   TaskController.updateTask
 );
 
@@ -64,9 +64,9 @@ router.put(
 router.delete(
   '/:taskId',
   [
-    param('taskId').isUUID().withMessage('Invalid task ID'),
-    validate,
+    param('taskId').isUUID().withMessage('Invalid task ID')
   ],
+  validateRequest,
   TaskController.deleteTask
 );
 
@@ -74,9 +74,9 @@ router.delete(
 router.get(
   '/upcoming/tasks',
   [
-    query('days').optional().isInt({ min: 1, max: 30 }).withMessage('Days must be between 1 and 30').toInt(),
-    validate,
+    query('days').optional().isInt({ min: 1, max: 30 }).withMessage('Days must be between 1 and 30').toInt()
   ],
+  validateRequest,
   TaskController.getUpcomingTasks
 );
 

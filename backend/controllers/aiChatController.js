@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+const httpStatus = require('http-status-codes');
 const AIChatService = require('../services/aiChatService');
 const logger = require('../utils/logger');
 

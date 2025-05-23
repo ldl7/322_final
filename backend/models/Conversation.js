@@ -94,7 +94,8 @@ module.exports = (sequelize) => {
       allowNull: false,
       field: 'updated_at',
       defaultValue: DataTypes.NOW
-    }
+    },
+    // Removed isAIConversation as all conversations are with AI
   }, {
     sequelize,
     modelName: 'Conversation',

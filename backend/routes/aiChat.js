@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, query } = require('express-validator');
 const { authenticateJWT } = require('../middleware/auth');
-const { validateRequest } = require('../middleware/validators/validateRequest');
+const { validateRequest } = require('../middleware/validators/commonValidator');
 const AIChatController = require('../controllers/aiChatController');
 
 const router = express.Router();

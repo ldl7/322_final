@@ -95,6 +95,13 @@ yarn-error.log*
 *.sln
 *.sw?
 
+# Repomix output
+repomix-output.xml
+mobile-app/repomix-output.xml
+
+# Backend logs
+backend/logs/
+
 # Temp files
 .temp/
 .tmp/
