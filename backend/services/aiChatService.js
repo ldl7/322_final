@@ -1,160 +1,99 @@
-const { Op } = require('sequelize');
-const { Conversation, Message, User } = require('../models');
+const OpenAI = require('openai');
 const logger = require('../utils/logger');
-const aiService = require('./aiService');
+const { Conversation, Message, User } = require('../models');
 
-class AIChatService {
-  /**
-   * Get or create an AI conversation for a user
-   * @param {string} userId - The ID of the user
-   * @returns {Promise<Object>} The AI conversation
-   */
-  static async getOrCreateAIConversation(userId) {
-    try {
-      // Check if user already has an AI conversation
-      const existingConversation = await Conversation.findOne({
-        where: {
-          type: 'direct',
-          name: 'AI Coach',
-          '$participants.id$': userId
-        },
-        include: [{
+// Initialize OpenAI API
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+/**
+ * Generate a response from the AI coach
+ * @param {string} conversationId - ID of the conversation
+ * @param {string} userMessage - The user's message
+ * @param {string} userId - ID of the user
+ * @returns {Promise<Object>} - The AI's response
+ */
+const generateResponse = async (conversationId, userMessage, userId) => {
+  try {
+    // Get conversation history (last 10 messages)
+    const messages = await Message.findAll({
+      where: { conversationId },
+      order: [['createdAt', 'ASC']],
+      limit: 10,
+      include: [
+        {
           model: User,
-          as: 'participants',
-          where: { id: userId },
-          attributes: ['id'],
-          through: { attributes: [] }
-        }]
-      });
-
-      if (existingConversation) {
-        return existingConversation;
-      }
-
-      // Create a new AI conversation
-      const conversation = await Conversation.create({
-        type: 'direct',
-        name: 'AI Coach',
-        createdBy: userId,
-        isAIConversation: true
-      });
-
-      // Add the user to the conversation
-      await conversation.addParticipant(userId);
-
-      // Add a welcome message from the AI
-      await Message.create({
-        content: 'Hello! I\'m your AI Coach. How can I assist you today?',
-        senderId: '00000000-0000-0000-0000-000000000000', // System AI user ID
-        conversationId: conversation.id,
-        isFromAI: true
-      });
-
-      return conversation;
-    } catch (error) {
-      logger.error('Error in getOrCreateAIConversation:', error);
-      throw new Error('Failed to get or create AI conversation');
-    }
-  }
-
-  /**
-   * Send a message to the AI coach and get a response
-   * @param {string} userId - The ID of the user sending the message
-   * @param {string} content - The message content
-   * @returns {Promise<Object>} The AI's response message
-   */
-  static async sendMessageToAI(userId, content) {
-    const transaction = await sequelize.transaction();
-    
-    try {
-      // Get or create the AI conversation
-      const conversation = await this.getOrCreateAIConversation(userId);
-      
-      // Save the user's message
-      const userMessage = await Message.create({
-        content,
-        senderId: userId,
-        conversationId: conversation.id,
-        isFromAI: false
-      }, { transaction });
-
-      // Get conversation history (last 10 messages for context)
-      const messages = await Message.findAll({
-        where: { conversationId: conversation.id },
-        order: [['createdAt', 'ASC']],
-        limit: 10,
-        transaction
-      });
-
-      // Format messages for the AI
-      const formattedMessages = messages.map(msg => ({
-        role: msg.isFromAI ? 'assistant' : 'user',
-        content: msg.content
-      }));
-
-      // Get AI response
-      const aiResponse = await aiService.generateResponse(formattedMessages, userId);
-
-      // Save the AI's response
-      const aiMessage = await Message.create({
-        content: aiResponse,
-        senderId: '00000000-0000-0000-0000-000000000000', // System AI user ID
-        conversationId: conversation.id,
-        isFromAI: true
-      }, { transaction });
-
-      await transaction.commit();
-      
-      return aiMessage;
-    } catch (error) {
-      await transaction.rollback();
-      logger.error('Error in sendMessageToAI:', error);
-      throw new Error('Failed to send message to AI');
-    }
-  }
-
-  /**
-   * Get AI conversation history for a user
-   * @param {string} userId - The ID of the user
-   * @param {number} limit - Maximum number of messages to return
-   * @param {number} offset - Offset for pagination
-   * @returns {Promise<Object>} Conversation and messages
-   */
-  static async getAIConversation(userId, limit = 20, offset = 0) {
-    try {
-      const conversation = await this.getOrCreateAIConversation(userId);
-      
-      const { count, rows: messages } = await Message.findAndCountAll({
-        where: { conversationId: conversation.id },
-        order: [['createdAt', 'DESC']],
-        limit,
-        offset,
-        include: [
-          {
-            model: User,
-            as: 'sender',
-            attributes: ['id', 'username', 'email']
-          }
-        ]
-      });
-
-      return {
-        conversation: {
-          id: conversation.id,
-          name: conversation.name,
-          type: conversation.type,
-          createdAt: conversation.createdAt,
-          updatedAt: conversation.updatedAt
+          as: 'sender',
+          attributes: ['id', 'username', 'first_name', 'last_name'],
         },
-        messages: messages.reverse(), // Return in chronological order
-        total: count,
-        hasMore: offset + messages.length < count
-      };
-    } catch (error) {
-      logger.error('Error in getAIConversation:', error);
-      throw new Error('Failed to get AI conversation');
-    }
-  }
-}
+      ],
+    });
 
-module.exports = AIChatService;
+    // Format messages for the AI
+    const formattedMessages = messages.map((msg) => ({
+      role: msg.senderId === process.env.AI_COACH_USER_ID ? 'assistant' : 'user',
+      content: msg.content,
+      name: msg.senderId === process.env.AI_COACH_USER_ID ? 'AI_Coach' : msg.sender.username || 'User',
+    }));
+
+    // Add the new user message
+    formattedMessages.push({
+      role: 'user',
+      content: userMessage,
+      name: 'User',
+    });
+
+    // Get user info for personalization
+    const user = await User.findByPk(userId, {
+      attributes: ['first_name', 'last_name', 'username'],
+    });
+
+    const userName = user?.first_name || user?.username || 'there';
+
+    // System message to set the AI's behavior
+    const systemMessage = {
+      role: 'system',
+      content: `You are an AI health and wellness coach named Coach Ally. You are having a conversation with ${userName}. ` +
+        'Your goal is to provide supportive, empathetic, and helpful guidance on health, fitness, nutrition, and general wellness. ' +
+        'Keep your responses concise, friendly, and professional. ' +
+        'If asked about medical advice, always recommend consulting with a healthcare professional. ' +
+        'Be encouraging and positive in your responses.'
+    };
+
+    // Prepare the messages array for the API call
+    const apiMessages = [systemMessage, ...formattedMessages];
+
+    // Call the OpenAI API with v4+ syntax
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: apiMessages,
+      temperature: 0.7,
+      max_tokens: 500,
+    });
+
+    const aiResponse = completion.choices[0].message.content;
+
+    return {
+      content: aiResponse,
+      metadata: {
+        model: 'gpt-3.5-turbo',
+        tokens: completion.usage?.total_tokens || 0,
+      },
+    };
+  } catch (error) {
+    logger.error('Error in aiChatService.generateResponse:', error);
+    
+    // Return a friendly error message if the API call fails
+    return {
+      content: "I'm sorry, I'm having trouble generating a response right now. Please try again later.",
+      metadata: {
+        error: error.message,
+      },
+    };
+  }
+};
+
+module.exports = {
+  generateResponse,
+};

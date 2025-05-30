@@ -209,6 +209,20 @@ module.exports = (sequelize, DataTypes) => {
           ] 
         },
       },
+      withAvatar: {
+        attributes: [
+          'id',
+          'username',
+          'email',
+          'first_name',
+          'last_name',
+          'role',
+          'is_email_verified',
+          'last_login',
+          'created_at',
+          'updated_at'
+        ]
+      }
     },
     hooks: {
       beforeCreate: async (user) => {

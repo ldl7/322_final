@@ -84,6 +84,7 @@ const login = async (req, res, next) => {
     logger.info(`User logged in: ${user.email}`);
     res.status(httpStatusCodes.OK).json({
       accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken, // Include refresh token in response
       user: user, // User object is sanitized by toJSON in model
     });
   } catch (error) {

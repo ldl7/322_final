@@ -64,22 +64,31 @@ const sendMessageHandler = async (req, res, next) => {
  * @access Private
  */
 const getMessagesHandler = async (req, res, next) => {
-    logger.info(`MESSAGE CONTROLLER: Entered getMessagesHandler for convId: ${req.params.conversationId}`); // Added logging
+    logger.info(`MESSAGE CONTROLLER: Entered getMessagesHandler for convId: ${req.params.conversationId}`);
     try {
         const userId = req.user.id;
         const { conversationId } = req.params;
         const { page, limit, beforeMessageId, afterMessageId } = req.query;
 
+        // Log the incoming query parameters for debugging
+        logger.info('MESSAGE CONTROLLER: Query params:', { 
+            page, 
+            limit, 
+            beforeMessageId, 
+            afterMessageId 
+        });
+
         const messagesResult = await messageService.getMessages(
             conversationId,
             userId,
             {
-                page: page ? parseInt(page, 10) : undefined,
-                limit: limit ? parseInt(limit, 10) : undefined,
+                page,
+                limit,
                 beforeMessageId,
                 afterMessageId
             }
         );
+        
         res.status(httpStatusCodes.OK).json(messagesResult);
     } catch (error) {
         logger.error('Error in getMessagesHandler:', error);

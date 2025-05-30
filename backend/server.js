@@ -13,16 +13,15 @@ const { sequelize } = require('./models'); // Corrected: import sequelize instan
 
 // Route imports
 const authRoutes = require('./routes/authRoutes');
-const initializeUserRoutes = require('./routes/users');
-const userRoutes = initializeUserRoutes(express.Router);
-const initializeConversationRoutes = require('./routes/conversations');
-const conversationRoutes = initializeConversationRoutes(express.Router);
+const userRoutes = require('./routes/users');
+const conversationRoutes = require('./routes/conversations');
 const aiChatRoutes = require('./routes/aiChat');
 // Message routes are now imported and mounted within conversation routes
 
 // WebSocket middleware and event handlers
 const socketAuthMiddleware = require('./middleware/websocket/auth');
-const initializeSocketEventHandlers = require('./socket/events');
+// Socket event handlers are currently disabled
+// const initializeSocketEventHandlers = require('./socket/events');
 
 const app = express();
 const server = http.createServer(app);
@@ -98,7 +97,9 @@ io.on('connection', (socket) => {
   if (socket.user) {
     logger.info(`Authenticated client connected: ${socket.user.username} (Socket ID: ${socket.id})`);
     socket.join(socket.user.id.toString()); // Join a room specific to the user
-    initializeSocketEventHandlers(io, socket); // Initialize event handlers for this socket
+    // Socket event handlers are currently disabled
+    // initializeSocketEventHandlers(io, socket);
+    logger.info('Socket event handlers are currently not initialized.');
   } else {
     logger.warn(`Unauthenticated client connected (Socket ID: ${socket.id}). Disconnecting.`);
     socket.disconnect(true);
@@ -137,28 +138,29 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Import test user creator
-const createTestUser = require('./seeders/createTestUser');
+// Test user creation is currently disabled
+// const createTestUser = require('./seeders/createTestUser');
 
 // Database connection and server start
 sequelize.authenticate()
   .then(async () => {
     logger.info('Database connection established successfully.');
     
-    // Create test user
+    // Test user creation is currently disabled
     if (process.env.NODE_ENV !== 'production') {
-      try {
-        logger.info('Setting up test user...');
-        const result = await createTestUser();
-        if (result.success) {
-          logger.info(result.message);
-        } else {
-          logger.error('Failed to create test user:', result.message);
-          if (result.error) logger.error('Error details:', result.error);
-        }
-      } catch (error) {
-        logger.error('Unexpected error in test user setup:', error);
-      }
+      logger.warn('Test user creation is currently skipped as createTestUser.js is not found.');
+      // try {
+      //   logger.info('Setting up test user...');
+      //   const result = await createTestUser();
+      //   if (result.success) {
+      //     logger.info(result.message);
+      //   } else {
+      //     logger.error('Failed to create test user:', result.message);
+      //     if (result.error) logger.error('Error details:', result.error);
+      //   }
+      // } catch (error) {
+      //   logger.error('Unexpected error in test user setup:', error);
+      // }
     }
     
     // Start the server

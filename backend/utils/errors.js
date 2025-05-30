@@ -1,124 +1,166 @@
 /**
  * Custom Error Classes
  * 
- * Defines custom error classes for different types of application errors.
- * Provides consistent error handling and formatting.
- * 
- * @module utils/errors
- * @requires http-status-codes
- * 
- * @example
- * // Example usage:
- * const { NotFoundError, ValidationError, BadRequestError } = require('../utils/errors');
- * throw new NotFoundError('User not found');
- * throw new ValidationError('Invalid input', { field: 'email' });
- * throw new BadRequestError('Invalid request');
+ * This module exports custom error classes for consistent error handling
+ * across the application. These errors can be used to provide more specific
+ * error information and to handle different types of errors in a consistent way.
  */
-
-// File implemented with custom error classes:
-// 1. ApiError - Base error class
-// 2. NotFoundError - 404 errors
-// 3. ValidationError - 400 errors
-// 4. UnauthorizedError - 401 errors
-// 5. ForbiddenError - 403 errors
-// 6. ConflictError - 409 errors
-// 7. BadRequestError - 400 errors
-
-// Implementation includes proper error serialization and status codes
-
-const httpStatus = require('http-status-codes');
 
 /**
- * Base API Error class that all other error classes extend.
- * Sets up common properties for all API errors.
+ * Base error class for application-specific errors
+ * @extends Error
  */
-class ApiError extends Error {
-  constructor(
-    message = 'An error occurred',
-    statusCode = httpStatus.INTERNAL_SERVER_ERROR,
-    isOperational = true,
-    stack = ''
-  ) {
+class AppError extends Error {
+  /**
+   * Create an AppError
+   * @param {string} message - Error message
+   * @param {number} statusCode - HTTP status code
+   * @param {string} code - Application-specific error code
+   * @param {Object} details - Additional error details
+   */
+  constructor(message, statusCode = 500, code = 'INTERNAL_SERVER_ERROR', details = {}) {
     super(message);
+    this.name = this.constructor.name;
     this.statusCode = statusCode;
-    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
-    this.isOperational = isOperational;
-
-    if (stack) {
-      this.stack = stack;
-    } else {
-      Error.captureStackTrace(this, this.constructor);
-    }
+    this.code = code;
+    this.details = details;
+    this.isOperational = true; // This is used to distinguish operational errors from programming errors
+    
+    // Capture stack trace, excluding constructor call from it
+    Error.captureStackTrace(this, this.constructor);
   }
 }
 
 /**
- * 400 Bad Request Error
- * Used when the server cannot process the request due to client error.
+ * Error class for authentication related errors
+ * @extends AppError
  */
-class BadRequestError extends ApiError {
-  constructor(message = 'Bad Request') {
-    super(message, httpStatus.BAD_REQUEST);
+class AuthenticationError extends AppError {
+  /**
+   * Create an AuthenticationError
+   * @param {string} message - Error message
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Authentication failed', details = {}) {
+    super(message, 401, 'AUTHENTICATION_FAILED', details);
   }
 }
 
 /**
- * 401 Unauthorized Error
- * Used when authentication is required but has failed or not been provided.
+ * Error class for authorization related errors
+ * @extends AppError
  */
-class UnauthorizedError extends ApiError {
-  constructor(message = 'Unauthorized') {
-    super(message, httpStatus.UNAUTHORIZED);
+class AuthorizationError extends AppError {
+  /**
+   * Create an AuthorizationError
+   * @param {string} message - Error message
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Not authorized', details = {}) {
+    super(message, 403, 'UNAUTHORIZED', details);
   }
 }
 
 /**
- * 403 Forbidden Error
- * Used when the user doesn't have permission to access a resource.
+ * Error class for not found errors
+ * @extends AppError
  */
-class ForbiddenError extends ApiError {
-  constructor(message = 'Forbidden') {
-    super(message, httpStatus.FORBIDDEN);
+class NotFoundError extends AppError {
+  /**
+   * Create a NotFoundError
+   * @param {string} resource - Name of the resource that was not found
+   * @param {Object} details - Additional error details
+   */
+  constructor(resource = 'Resource', details = {}) {
+    super(`${resource} not found`, 404, 'NOT_FOUND', details);
   }
 }
 
 /**
- * 404 Not Found Error
- * Used when a requested resource is not found.
+ * Error class for validation errors
+ * @extends AppError
  */
-class NotFoundError extends ApiError {
-  constructor(message = 'Resource not found') {
-    super(message, httpStatus.NOT_FOUND);
+class ValidationError extends AppError {
+  /**
+   * Create a ValidationError
+   * @param {string} message - Error message
+   * @param {Array|Object} errors - Validation errors
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Validation failed', errors = [], details = {}) {
+    super(message, 400, 'VALIDATION_ERROR', { ...details, errors });
   }
 }
 
 /**
- * 409 Conflict Error
- * Used when a request conflicts with the current state of the server.
+ * Error class for database errors
+ * @extends AppError
  */
-class ConflictError extends ApiError {
-  constructor(message = 'Conflict') {
-    super(message, httpStatus.CONFLICT);
+class DatabaseError extends AppError {
+  /**
+   * Create a DatabaseError
+   * @param {string} message - Error message
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Database error occurred', details = {}) {
+    super(message, 500, 'DATABASE_ERROR', details);
   }
 }
 
 /**
- * 422 Validation Error
- * Used when request data fails validation.
+ * Error class for rate limiting
+ * @extends AppError
  */
-class ValidationError extends ApiError {
-  constructor(message = 'Validation Error', errors = []) {
-    super(message, httpStatus.UNPROCESSABLE_ENTITY);
-    this.errors = errors;
+class RateLimitError extends AppError {
+  /**
+   * Create a RateLimitError
+   * @param {string} message - Error message
+   * @param {number} retryAfter - Number of seconds to wait before retrying
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Too many requests', retryAfter = 60, details = {}) {
+    super(message, 429, 'RATE_LIMIT_EXCEEDED', { ...details, retryAfter });
+  }
+}
+
+/**
+ * Error class for service unavailability
+ * @extends AppError
+ */
+class ServiceUnavailableError extends AppError {
+  /**
+   * Create a ServiceUnavailableError
+   * @param {string} message - Error message
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Service temporarily unavailable', details = {}) {
+    super(message, 503, 'SERVICE_UNAVAILABLE', details);
+  }
+}
+
+/**
+ * Error class for bad requests
+ * @extends AppError
+ */
+class BadRequestError extends AppError {
+  /**
+   * Create a BadRequestError
+   * @param {string} message - Error message
+   * @param {Object} details - Additional error details
+   */
+  constructor(message = 'Bad request', details = {}) {
+    super(message, 400, 'BAD_REQUEST', details);
   }
 }
 
 module.exports = {
-  ApiError,
-  BadRequestError,
-  UnauthorizedError,
-  ForbiddenError,
+  AppError,
+  AuthenticationError,
+  AuthorizationError,
   NotFoundError,
-  ConflictError,
-  ValidationError
+  ValidationError,
+  DatabaseError,
+  RateLimitError,
+  ServiceUnavailableError,
+  BadRequestError
 };

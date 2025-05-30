@@ -49,6 +49,13 @@ android/captures/
 # Expo
 .expo/
 web-build/
+
+# Repomix output
+repomix-output.xml
+mobile-app/repomix-output.xml
+
+# Backend logs
+backend/logs/
 web-report/
 *.jks
 *.p8
